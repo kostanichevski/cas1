@@ -13,10 +13,18 @@ const moviesSchema = new mongoose.Schema({
     type: Number,
     // required: [true, "Vnesi ocenka"],
   },
-  metascore: {
-    type: Number,
-    // required: [true, "Vnesi metascore"],
+  author: {
+    type: String,
+    ref: "User",
   },
+  image: {
+    type: String,
+    default: "default.jpg",
+  },
+  // metascore: {
+  //   type: Number,
+  //   // required: [true, "Vnesi metascore"],
+  // },
 });
 
 const Movie = mongoose.model("Movie", moviesSchema);

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <title>filmovi</title>
+  </head>
+  <body>
+    <h1><%= "Movies" %></h1>
+    <h4><%= status %></h4>
+    <% if (movies.length === 0) { %>
+    <p>No movies found.</p>
+    <!-- so forEach dinamicki kje go prikazeme celiot movie objekt -->
+    <% } else {%> <% movies.forEach(movie => {%>
+    <div class="movie">
+      <a href="/viewMovies/<%=movie._id%>">
+        <h2 class="movie-naslov"><%= movie.naslov %></h2></a
+      >
+      <img src="public/img/movies/<% movie.image %>" alt="" />
+      <p><%= movie.godina %></p>
+      <div class="movie-rating">
+        <p>Rating: <%= movie.rating %></p>
+      </div>
+      <!-- <form action="/deleteMovie/<%= movie._id %>" method="POST">
+        <button type="submit" name="deleteMovie">Delete Movie</button>
+      </form> -->
+      <a href="/deleteMovie/<%= movie._id %>">Delete movie</a>
+    </div>
+    <%} ); %> <%} %>
+    <form action="/createMovie" method="POST">
+      <label for="naslov">Naslov:</label>
+      <input type="text" id="naslov" name="naslov" />
+      <label for="godina">Godina:</label>
+      <input type="number" id="godina" name="godina" />
+      <label for="rating">Rating:</label>
+      <input type="number" id="rating" name="rating" />
+      <button class="movie-button" type="submit" name="createMovie">
+        Vnesi nov film
+      </button>
+    </form>
+  </body>
+</html>

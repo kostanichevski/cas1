@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Movie details</h1>
+    <div>
+      <h2>Naslov: <%= movie.naslov %></h2>
+      <p>Godina: <%= movie.godina %></p>
+      <h2>Rating: <%= movie.rating %></h2>
+    </div>
+    <hr />
+
+    <form action="/modifyMovie/<%= movie._id %>" method="POST">
+      <label for="naslov">Naslov:</label>
+      <input
+        type="text"
+        id="naslov"
+        name="naslov"
+        value="<%= movie.naslov %>"
+      />
+      <label for="godina">Godina:</label>
+      <input
+        type="number"
+        id="godina"
+        name="godina"
+        value="<%= movie.godina %>"
+      />
+      <label for="rating">Rating:</label>
+      <input
+        type="number"
+        id="rating"
+        name="rating"
+        value="<%= movie.rating%>"
+      />
+
+      <button class="movie-button" type="submit" name="createMovie">
+        Azuriraj
+      </button>
+    </form>
+
+    <a href="/viewMovies">Go back</a>
+  </body>
+</html>

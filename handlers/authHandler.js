@@ -87,7 +87,28 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.protect = async (req, res) => {
+exports.protect = async (req, res, next) => {
   try {
-  } catch (err) {}
+    let token;
+    if (req.headers.authorization) {
+      token = req.headers.authorization.split(" ")[1];
+    }
+
+    if (!token) {
+      return res.status(500).send("You are not logged in! please log in");
+    }
+
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+    const userTrue = await User.findById(decoded.id);
+
+    if (!userTrue) {
+      return res.status(401).send("User does not longer exist!");
+    }
+
+    req.auth = userTrue;
+    next();
+  } catch (err) {
+    return res.status(500).send("Internal server error");
+  }
 };
